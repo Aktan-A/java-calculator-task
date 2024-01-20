@@ -7,11 +7,12 @@ public class Calculator {
         String[] elements = InputParser.parseInput(scan.nextLine());
 
         for (String operator : ConstantUtil.OPERATORS) {
-            for (int i = 1; i < elements.length; i+=2) {
+            for (int i = 1; i < elements.length; i++) {
                 if (elements[i].equals(operator)) {
                     int result = calculate(elements[i-1], elements[i], elements[i+1]);
                     elements[i-1] = Integer.toString(result);
                     elements = removeListElements(elements, i, i+1);
+                    i--;
                 }
             }
         }

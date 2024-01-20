@@ -19,13 +19,20 @@ public class InputParser {
     }
 
     public static void validateElements(String[] elements) throws Exception {
+        int operandCount = 0;
+        int operatorCount = 0;
         for (int i = 0; i < elements.length; i++) {
             String element = elements[i];
             if (i % 2 == 0) {
                 validateOperand(element);
+                operandCount++;
             } else {
                 validateOperator(element);
+                operatorCount++;
             }
+        }
+        if (operatorCount + 1 != operandCount) {
+            throw new Exception("Invalid amount of operators and operands.");
         }
     }
 

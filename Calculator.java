@@ -6,9 +6,9 @@ public class Calculator {
         Scanner scan = new Scanner(System.in);
         String[] elements = InputParser.parseInput(scan.nextLine());
 
-        for (String operator : ConstantUtil.OPERATORS) {
+        for (String[] operators : ConstantUtil.CALCULATION_ORDER) {
             for (int i = 1; i < elements.length; i++) {
-                if (elements[i].equals(operator)) {
+                if (arrayContainsValue(elements[i], operators)) {
                     int result = calculate(elements[i-1], elements[i], elements[i+1]);
                     elements[i-1] = Integer.toString(result);
                     elements = removeListElements(elements, i, i+1);
@@ -17,6 +17,15 @@ public class Calculator {
             }
         }
         System.out.printf("Output:%n%s%n", elements[0]);
+    }
+
+    private static boolean arrayContainsValue(String value, String[] array) {
+        for (String arrayMember : array) {
+            if (arrayMember.equals(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static String[] removeListElements(String[] elements, int fromIndex, int toIndex) {
